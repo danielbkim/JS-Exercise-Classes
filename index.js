@@ -90,11 +90,13 @@ class Airplane {
     drive(distance) {
       
       let milesLeft = this.tank * this.milesPerGallon;
-      console.log(milesLeft);
+      // console.log(milesLeft);
 
       if (distance <= milesLeft) {
         this.odometer += distance;
         this.tank = this.tank = (distance / this.milesPerGallon); // this is breaking - need to check the math
+      } else {
+
       }
     }
   }
@@ -112,13 +114,13 @@ class Airplane {
           + {name} and {location} of course come from the instance's own properties.
   */
 class Lambdasian {
-  constructor(info){
-    this.name = info.name;
-    this.age = info.age;
-    this.location = info.location;
+  constructor(profile){
+    this.name = profile.name;
+    this.age = profile.age;
+    this.location = profile.location;
   }
   speak(){
-    `Hello my name is ${this.name}, I am from ${this.location}`
+    return `Hello my name is ${this.name}, I am from ${this.location}`
   }
 }
   
@@ -136,9 +138,22 @@ class Lambdasian {
           + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
           + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
   */
- class Instructor {
+class Instructor extends Lambdasian {
+  constructor(profile){
+    super(profile);
+    // console.log(profile.name);
+    this.specialty = profile.specialty;
+    this.favLanguage = profile.favLanguage;
+    this.catchPhrase = profile.catchPhrase;
+  }
 
- }
+  demo(subjectString){
+    return `Today we are learning about ${subjectString} where subject is the param passed in.`
+  }
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
+}
   /*
     TASK 5
       - Write a Student class extending Lambdasian.
@@ -154,9 +169,27 @@ class Lambdasian {
           + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
- class Student {
-     
- }
+class Student extends Lambdasian{
+  constructor(profile) {
+    super(profile);
+    this.previousBackground = profile.previousBackground;
+    this.className = profile.className;
+    this.favSubjects = profile.favSubjects;
+  }
+
+  listSubjects(){
+    return `Loving ${this.favSubjects}`;
+  }
+
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+
+  sprintChallenge(subject){
+    return `${this.name} has begun spring challenge on ${subject}`
+  }
+
+}
   
   /*
     TASK 6
@@ -171,9 +204,9 @@ class Lambdasian {
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
-     
- }
+class ProjectManager extends Instructor{
+  
+}
   /*
     STRETCH PROBLEM (no tests!)
       - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
