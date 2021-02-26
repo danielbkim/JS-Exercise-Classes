@@ -57,7 +57,7 @@ class Airplane {
       this.stomach = [];
     }
     toString() {
-      return `${this.name}, ${this.age}`
+      return `${this.name}, ${this.age}`;
     }
   }
   
@@ -94,10 +94,12 @@ class Airplane {
 
       if (distance <= milesLeft) {
         this.odometer += distance;
-        this.tank = this.tank = (distance / this.milesPerGallon); // this is breaking - need to check the math
+        this.tank = this.tank - (distance / this.milesPerGallon); // this is breaking - need to check the math
       } else {
-
-      }
+        this.odometer += milesLeft;
+        this.tank = 0;
+        return `I ran out of fuel at ${this.odometer}!`
+      };
     }
   }
   
@@ -148,7 +150,7 @@ class Instructor extends Lambdasian {
   }
 
   demo(subjectString){
-    return `Today we are learning about ${subjectString} where subject is the param passed in.`
+    return `Today we are learning about ${subjectString}`;
   }
   grade(student, subject){
     return `${student.name} receives a perfect score on ${subject}`
@@ -186,9 +188,8 @@ class Student extends Lambdasian{
   }
 
   sprintChallenge(subject){
-    return `${this.name} has begun spring challenge on ${subject}`
+    return `${this.name} has begun spring challenge on ${subject}`;
   }
-
 }
   
   /*
@@ -205,7 +206,19 @@ class Student extends Lambdasian{
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
 class ProjectManager extends Instructor{
-  
+  constructor(profile) {
+    super(profile);
+    this.gradClassName = profile.gradClassName;
+    this.favInstructor = profile.favInstructor;
+  }
+
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times`;
+  };
+
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  };
 }
   /*
     STRETCH PROBLEM (no tests!)
